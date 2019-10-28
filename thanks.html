@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Open+Sans:400,700,800" rel="stylesheet">
+    <title>Website boilerplate</title>
+    <!-- Set the viewport so responsive design works -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Give a description for accessibility and SEO -->
+    <meta name="description" content="A simple boilerplate for new web projects.">
+
+    <link rel="stylesheet" href="juanindex.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="space-below">
+            <img src="IMG_1081 - copia.JPG" alt="Logo placeholder" width="100" height="66" title="Double roar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="space-below">
+            <h1>Thanks</h1>
+            <!-- Here's an internal anchor link -->
+            <p>
+                Your message was sent.
+            </p>
+            <section id="submitted-form" class="center-box" hidden>
+                <h2>Submitted message</h2>
+
+                <h3>Name</h3>
+                <p id="submitted-name"><em>Not given</em></p>
+                
+                <h3>Subject</h3>
+                <p id="submitted-subject"><em>Not given</em></p>
+
+                <h3>Email</h3>
+                <p id="submitted-email"><em>Not given</em></p>
+
+                <h3>Phone number</h3>
+                <p id="submitted-phone"><em>Not given</em></p>
+
+                <h3>Message</h3>
+                <p id="submitted-message"><em>Not given</em></p>
+            </section> <!-- .center-box -->
+            <noscript>
+                <p>Please enable JavaScript to view the submitted message.</p>
+            </noscript>
+        </main>
+        <footer>
+            <p>The fine print</p>
+        </footer>
+    </div> <!-- .wrapper -->
+    <script>
+        /**
+         * This script will run when the page loads.
+         * In case you're curious how this works:
+         * This is because we're using JavaScript IIFE syntax.
+         * Please get familiar with JavaScript functions first,
+         * before going down that research rabbit hole.
+         */
+        (function() {
+            /* Create variables to store all the elements we'll need */
+            var submittedForm = document.querySelector('#submitted-form');
+            var submittedName = document.querySelector('#submitted-name');
+            var submittedSubject = document.querySelector('#submitted-subject');
+            var submittedEmail = document.querySelector('#submitted-email');
+            var submittedPhone = document.querySelector('#submitted-phone');
+            var submittedMessage = document.querySelector('#submitted-message');
+            
+            /**
+             * Grab the query string which represents submitted form data
+             * (everything from the ? in the URL)
+             */
+            var queryString = location.search;
+
+            /**
+             * Create a new URLSearchParams object so we can access
+             * individual parameters from the query string separately.
+             * In this case, a parameter is a name=value pair
+             * reprensenting a form field.
+             */
+            var urlParams = new URLSearchParams(queryString);
+
+            /**
+             * Check whether each form field was filled.
+             * For each field that was not empty,
+             * replace the default value of <em>not given</em>
+             * with the value submitted by the user.
+             */
+            if (urlParams.get('fullname') !== '') {
+                submittedName.textContent = urlParams.get('fullname');
+            }
+            if (urlParams.get('subject') !== '') {
+                submittedSubject.textContent = urlParams.get('subject');
+            }
+            if (urlParams.get('email') !== '') {
+                submittedEmail.textContent = urlParams.get('email');
+            }
+            if (urlParams.get('phone') !== '') {
+                submittedPhone.textContent = urlParams.get('phone');
+            }
+            if (urlParams.get('message') !== '') {
+                submittedMessage.textContent = urlParams.get('message');
+            }
+            submittedForm.removeAttribute('hidden');
+        })();
+    </script>
+</body>
+</html>
